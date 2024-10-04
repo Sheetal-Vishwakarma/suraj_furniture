@@ -1,0 +1,377 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>{{ page }} | Suraj Furniture</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <!-- <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon"> -->
+  <link rel="shortcut icon" href="{% static 'assets/img/logo/favicon.ico' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/img/logo/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/img/logo/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/logo/favicon-16x16.png' %}">
+  <!-- <link rel="manifest" href="/site.webmanifest"> -->
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Mentor
+  * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="/" class="logo d-flex align-items-center me-auto">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <img src="{% static 'assets/img/logo/chair_icon.png' %}" class="stoke" alt="">
+        <h1 class="sitename">Suraj Furniture</h1>
+      </a>
+      <form id="gallery_form" method="post" action="/gallery/">
+          {% csrf_token %}
+          <input type="hidden" name="category_type" id="category_type">
+      </form>
+      <nav id="navmenu" class="navmenu">        
+        <ul>
+          <li><a href="/" {% if page == 'Home' %}class="active"{% endif %}>Home<br></a></li>
+          <li><a href="/about/" {% if page == 'About Us' %}class="active"{% endif %}>About Us</a></li>
+          <li class=""><a href="/#testimonials-section">Testimonials</a></li>
+          <li class="d-none"><a href="/trainers/">Trainers</a></li>
+          <li class="d-none"><a href="/events/">Events</a></li>
+          <li class="d-none"><a href="/pricing/">Pricing</a></li>
+          <li class="dropdown" {% if page == 'Gallery' %}class="active"{% endif %}>
+            <a href="javascript:void(0);" class="gallery_menu" data-value="all"><span>Gallery</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              {% if category_types %}
+                {% for category in category_types %}
+                  <li><a href="javascript:void(0);" class="gallery_menu" data-value="{{ category.type }}">{{ category.type }}</a></li>    
+                {% endfor %}
+              {% endif %}
+              <!-- <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Kabord</a></li>
+                  <li><a href="#">Moduler Kitchen</a></li>
+                  <li><a href="#">Bed</a></li>
+                  <li><a href="#">Chairs</a></li>
+                  <li><a href="#">Table</a></li>
+                </ul>
+              </li> -->
+                <!-- <li><a href="#">Kabord</a></li> -->                
+            </ul>
+          </li>
+          <li><a href="/contact/" {% if page == 'Contact Us' %}class="active"{% endif %}>Contact Us</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted gallery_menu" href="javascript:void(0);" data-value="all">Get Started</a>
+
+    </div>
+  </header>
+
+  {% block start %}
+  {% endblock %}
+  
+  <footer id="footer" class="footer position-relative light-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="/" class="logo d-flex align-items-center">
+            <img src="{% static 'assets/img/logo/chair_icon.png' %}" class="stoke" alt="">
+            <span class="sitename">Suraj Furniture</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Shop no. 4, Sai balaji darshan, Gograswadi,</p>
+            <p> Dombivali (East) - 421201, Maharashtra, India.</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+91 9930311414 / 9324768224</span></p>
+            <p><strong>Email:</strong> <span>bajarangbali1969@gmail.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4 d-none">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about/">About us</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+            <li><a href="/terms_of_services/">Terms of service</a></li>
+            <li><a href="/privacy_policy/">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Gallery</h4>
+          <ul>
+            {% if category_types %}
+                {% for category in category_types %}
+                  <li><a href="javascript:void(0);" class="gallery_menu" data-value="{{ category.type }}">{{ category.type }}</a></li>    
+                {% endfor %}
+              {% endif %}
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Our Newsletter</h4>
+          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+          <form action="newsletter/" method="post" class="php-email-form" id="footer-newsletter">
+            <div class="newsletter-form"><input type="email" name="newsletter_email" id="newsletter_email"><input type="button" value="Subscribe" id="newletter_submit_btn"></div>
+            <div class="loading">Loading</div>
+            <center><div class="error-message"></div></center>
+            <center><div class="sent-message">Thank you! You are subscribed to our newsletter.</div></center>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Suraj Furniture</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="#">Sheetal V</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(function() {
+        // setTimeout() function will be fired after page is loaded
+        // it will wait for 5 sec. and then will fire
+        // $("#successMessage").hide() function
+        setTimeout(function() {
+            $(".php-email-form .sent-message").hide('blind', {}, 500)
+        }, 3000);
+
+        // setTimeout(function() {
+        //     $(".php-email-form .error-message").hide('blind', {}, 500)
+        // }, 3000);
+    });
+    function checkEmail(email) {
+      var pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i
+      if(!pattern.test(email)){
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
+
+    $(document).on('click','#submit_contact_form_btn',function(e){
+      e.preventDefault();
+      var data_obj = {};
+      var error = 0;
+      var i=0;
+      data_obj.csrfmiddlewaretoken = '{{ csrf_token }}';
+      if($("#name").val()==''){
+        error++;
+      }
+      if($("#email").val()==''){
+        error++;
+      }
+      if($("#subject").val()==''){
+        error++;
+      }
+      if($("#message").val()==''){
+        error++;
+      }
+      //validation for form fields
+      if(error>0){
+        $('#submit_contact_form .sent-message').css('display','none');
+        $('#submit_contact_form .error-message').html('');
+        $('#submit_contact_form .error-message').html('Please enter required details');
+        $('#submit_contact_form .error-message').css('display','block');
+        $('#submit_contact_form .loading').css('display','none');
+        
+        setTimeout(function() {
+          $('#submit_contact_form .error-message').fadeOut('slow');
+        }, 3000);
+        window.location.href = '#contact_form_section';
+        return false;
+      }
+      data_obj.name = $("#name").val();
+      data_obj.email = $("#email").val();
+      data_obj.subject = $("#subject").val();
+      data_obj.message = $("#message").val();
+      $.ajax({
+        type:"POST",
+        url: "/insert_contact_form/",       
+        data: data_obj,
+        beforeSend: function() {
+            // setting a timeout
+            $('#submit_contact_form .loading').css('display','block');
+            $('#submit_contact_form .sent-message').css('display','none');
+                $('#submit_contact_form .error-message').css('display','none');
+            i++;
+        },
+        success: function(data){   
+            if(data=="success"){
+                $("#submit_contact_form")[0].reset();
+                $('#submit_contact_form .sent-message').css('display','block');
+                $('#submit_contact_form .error-message').css('display','none');
+                $('#submit_contact_form .loading').css('display','none');
+                setTimeout(function() {
+                  $('#submit_contact_form .sent-message').fadeOut('slow');
+                }, 3000); 
+            } else{                
+                $('#submit_contact_form .sent-message').css('display','none');
+                $('#submit_contact_form .error-message').css('display','block');
+                $('#submit_contact_form .loading').css('display','none');
+                setTimeout(function() {
+                  $('#submit_contact_form .error-message').fadeOut('slow');
+                }, 5000);
+            }
+            // console.log(data);            
+        }
+      });
+    });
+    
+    // Submit the newsletter form
+    $(document).on('click','#newletter_submit_btn',function(){
+        var error = 0;
+        var data_obj = {};
+        data_obj.csrfmiddlewaretoken = '{{ csrf_token }}';
+        var email = $("#newsletter_email").val();
+        console.log('email :'.email);
+        if(email=='' || email==undefined){
+          error++;
+        }
+        if(error>0){
+          $('#footer-newsletter .sent-message').css('display','none');
+          $('#footer-newsletter .error-message').html('');
+          $('#footer-newsletter .error-message').html('Please enter your email id');
+          $('#footer-newsletter .error-message').css('display','block');
+          $('#footer-newsletter .loading').css('display','none');
+          
+          setTimeout(function() {
+            $('#footer-newsletter .error-message').fadeOut('slow');
+            $('#newletter_submit_btn').prop('disabled', false);
+          }, 5000);
+          window.location.href = '#footer';
+          return false;
+        }
+        if(checkEmail(email)==false){
+            $('#footer-newsletter .sent-message1').css('display','none');
+            $('#footer-newsletter .error-message1').css('display','block');
+            $('#footer-newsletter .error-message1').html('');
+            $('#footer-newsletter .error-message1').html('Please enter valid email');
+            $('#footer-newsletter .loading1').css('display','none');
+            setTimeout(function() {
+              $('#footer-newsletter .error-message').fadeOut('slow');
+              $('#newletter_submit_btn').prop('disabled', false);
+            }, 5000);
+            window.location.href = '#footer';
+            return false;
+        }
+        data_obj.email = email;
+        if(error==0){
+            $.ajax({
+              type:"POST",
+              url: "/insert_newsletter_form/",       
+              data: data_obj,
+              beforeSend: function() {
+                  // setting a timeout
+                  $('#footer-newsletter .loading').css('display','block');
+                  $('#footer-newsletter .sent-message').css('display','none');
+                  $('#footer-newsletter .error-message').css('display','none');
+                  $('#newletter_submit_btn').prop('disabled', true);         
+              },
+              success: function(data){
+                  if(data=="success"){
+                      $("#footer-newsletter")[0].reset();
+                      $('#footer-newsletter .sent-message').css('display','block');
+                      $('#footer-newsletter .error-message').css('display','none');
+                      $('#footer-newsletter .loading').css('display','none');
+                      setTimeout(function() {
+                        $('#footer-newsletter .sent-message').fadeOut('slow');
+                      }, 3000);
+                      $('#newletter_submit_btn').prop('disabled', false); 
+                  } else if (data=='duplicate') {
+                      $('#footer-newsletter .sent-message').css('display','none');
+                      $('#footer-newsletter .error-message').html('');
+                      $('#footer-newsletter .error-message').html('This email id already subscribed');
+                      $('#footer-newsletter .error-message').css('display','block');
+                      $('#footer-newsletter .loading').css('display','none');
+                      setTimeout(function() {
+                        $('#footer-newsletter .error-message').fadeOut('slow');
+                        $('#newletter_submit_btn').prop('disabled', false);
+                      }, 3000);
+                  }
+                  else{                
+                      $('#footer-newsletter .sent-message').css('display','none');
+                      $('#footer-newsletter .error-message').css('display','block');
+                      $('#footer-newsletter .loading').css('display','none');
+                      setTimeout(function() {
+                        $('#footer-newsletter .error-message').fadeOut('slow');
+                        $('#newletter_submit_btn').prop('disabled', false);
+                      }, 3000);
+                  }
+                  // console.log(data);            
+              }
+           });
+        }
+    });
+
+    $(document).on('click','.gallery_menu',function(){
+      var category = $(this).data('value');
+      $("#category_type").val(category);
+      console.log(category);
+      $('#gallery_form').submit();      
+    });
+
+  </script>
+</body>
+
+</html>

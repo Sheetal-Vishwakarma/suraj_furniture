@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  nginx:
+    container_name: nginx-container
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/log/hrms:/var/log/nginx
+      - /home/admin/ssl:/etc/nginx/ssl
+    depends_on:
+      - django
+
+  django:
+    container_name: django-container
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./app/.env
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: mysql-container
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: db_suraj_furniture
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123456
+      DB_ROOT_PASSWORD: 123456
+    restart: always
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    volumes:
+      - db-mysql-volume:/var/lib/mysql
+  
+
+  # metabase:
+  #   image: metabase/metabase:latest
+  #   container_name: metabase_cont
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+
+  phpmyadmin:
+    container_name: phpmyadmin-container
+    build:
+      context: .
+      dockerfile: ./docker/phpmyadmin/Dockerfile
+    image: phpmyadmin:5.2.1
+    ports:
+#      - "8080:80"
+      - "8080:443"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=localhost
+      - UPLOAD_LIMIT=256M
+      - MAX_EXECUTION_TIME=300
+    restart: always
+    volumes:
+      - /home/admin/ssl:/etc/apache2/ssl  
+
+   
+      
+volumes:
+  db-mysql-volume:

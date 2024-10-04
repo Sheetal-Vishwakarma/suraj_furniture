@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+<!-- {% load static %} -->
+{% load filters %}
+
+{% block start %}
+<main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">      
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li>Gallery<br></li>
+            <li class="current text-capitalize">{{ category }}</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+    <section id="gallery" class="gallery section">
+
+        <div class="container-fluid aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+          {% if  gallery %}  
+          <div class="row gy-4 justify-content-center">
+            {% for gallery_data in gallery %}
+            <div class="col-xl-3 col-lg-4 col-md-6" title="{{ gallery_data.title|title }}">
+              <div class="gallery-item h-100">
+                {% if 'gallery' in gallery_data.image_name|stringformat:"s" %}                  
+                  <img src="/media/{{gallery_data.image_name}}" class="img-fluid" alt="">
+                  <div class="gallery-links d-flex align-items-center justify-content-center">
+                  <a href="/media/{{gallery_data.image_name}}" title="{{ gallery_data.title|title }}" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                {% else %}
+                  <img src="{% static 'assets/img/gallery/' %}{{gallery_data.image_name}}" class="img-fluid" alt="">
+                  <div class="gallery-links d-flex align-items-center justify-content-center">
+                  <a href="{% static 'assets/img/gallery/' %}{{gallery_data.image_name}}" title="{{ gallery_data.title|title }}" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                {% endif %}
+                  <!-- <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a> -->
+                </div>
+              </div>
+            </div><!-- End Gallery Item -->
+            {% endfor %}
+          </div>
+          {% else %}            
+            <div class="text-center">
+                <img class="gallery_img" src="{% static 'assets/img/gallery/no_image_available.jpg' %}">
+                <p class="no_data_text">No data available</p>
+            </div>
+          {% endif %}
+        </div>
+  
+      </section>
+
+  </main>
+{% endblock %}

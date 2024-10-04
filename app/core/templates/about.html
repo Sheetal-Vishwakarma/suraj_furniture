@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+  {% block start %}
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>About Us<br></h1>
+              <p class="mb-0">We provide Superior finishes, trendy designs and quality at affordable price and services to our beloved customers. We always love to hear from our customers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li class="current">About Us<br></li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- About Us Section -->
+    <section id="about-us" class="section about-us">
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+            <img src="{% static 'assets/img/home_bg2.jpg' %}" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+            <h3>We provide</h3>
+            <p class="fst-italic">
+              That helps enhance the mood and posivity of a given space : 
+            </p>
+            <ul>
+              <li><i class="bi bi-check-circle"></i> <span>Child & Elder friendly designs can help prevent injuiry and falls that, for the elderly, can cripple self-esteem and longevity.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>You home neds to be accommodating. It should be able to make space for all its people and their activities and belonging</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>You should design your home to anticipate your future requirements. It also needs to be durable. Basically, it needs to withstand the test of time.
+              </span></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /About Us Section -->
+
+    <!-- Counts Section -->
+    <section id="counts" class="section counts light-background">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Well Designed Home</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="564" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Child & Elder friendly</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="442" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Accommodating Space</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="424" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Anticipate Future</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Counts Section -->
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Testimonials</h2>
+        <p>What are they saying</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 1,
+                  "spaceBetween": 40
+                },
+                "1200": {
+                  "slidesPerView": 2,
+                  "spaceBetween": 20
+                }
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+            {% if testimonial_data %}
+              {% for testimonial in testimonial_data %}
+                <div class="swiper-slide">
+                  <div class="testimonial-wrap">
+                    <div class="testimonial-item">
+                      <img src="{% static 'assets/img/testimonials/'%}{{ testimonial.profile_image }}" class="testimonial-img" alt="">
+                      <h3>{{ testimonial.name }}</h3>
+                      <h4>{{ testimonial.designation }}</h4>
+                      <div class="stars d-none">
+                        {% for i in testimonial.rating|range_filter %}
+                          <i class="bi bi-star-fill"></i>
+                        {% endfor %}
+                      </div>
+                      <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>{{ testimonial.description }}</span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                      </p>
+                    </div>
+                  </div>
+                </div><!-- End testimonial item -->
+                {% endfor %}
+            {% else %}
+              <div><p>No data available</p></div>
+            {% endif %}
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section><!-- /Testimonials Section -->
+
+  </main>
+{% endblock %}

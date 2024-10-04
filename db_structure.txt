@@ -1,0 +1,51 @@
+auth_user
+	1   id 			Primary	int(11)			
+	2	password	varchar(128)
+	3	last_login	datetime(6)
+	4	is_superuser	tinyint(1)
+	5	username Index	varchar(150)
+	6	first_name	varchar(150)
+	7	last_name	varchar(150)
+	8	email	varchar(254)
+	9	is_staff	tinyint(1)
+	10	is_active	tinyint(1)
+	11	date_joined datetime(6)
+
+auth_group	
+	id Primary	int(11)
+	name
+
+gallery
+	id 			Primary	bigint(20)
+	type		varchar(255)
+	image_name	varchar(255)
+	status		smallint(6)
+	created_at	datetime(6)
+	updated_at	datetime(6)	
+
+testimonial
+	id Primary		bigint(20)
+	name			varchar(255)
+	profile_image	varchar(255)
+	designation		varchar(255)
+	rating			smallint(6)
+	description		longtext
+	status			tinyint(1)
+	created_at		datetime(6)
+	updated_at		datetime(6)		
+
+contact_us
+	id 			Primary	bigint(20)
+	name		longtext	
+	email		varchar(254)		
+	subject		longtext		
+	message		longtext		
+	created_at	datetime(6)		
+	updated_at	datetime(6)	
+
+newsletter
+	id 				Primary	bigint(20)
+	email			varchar(254)	
+	is_subscribed	varchar(5)
+	created_at		datetime(6)	
+	updated_at		datetime(6)

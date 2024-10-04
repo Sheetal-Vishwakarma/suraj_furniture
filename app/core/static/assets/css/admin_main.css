@@ -1,0 +1,8 @@
+.stoke{
+    filter: drop-shadow(1px 0 0 #A1662F) drop-shadow(0 1px 0 #A1662F) drop-shadow(-1px 0 0 #A1662F) drop-shadow(0 -1px 0 #A1662F) !important;
+    user-select: none !important;
+    height: auto !important;
+  }
+.login-logo img{
+    height: 150px !important;
+}  
