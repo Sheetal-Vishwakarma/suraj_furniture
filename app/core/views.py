@@ -6,13 +6,14 @@ from core.functions.functions import send_smtp_email
 from .models import Contactus,Newsletter,Gallery,Testimonial
 import os
 import datetime
+import pandas as pd
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Create your views here.
 def index(request):
     # return HttpResponse('This is index page')
-    category_types = Gallery.objects.values('type').distinct()
+    category_types = Gallery.objects.filter(status='1').values('type').distinct()
     testimonial_data = Testimonial.objects.filter(status='1').order_by('id')    
     context = {'page':'Home','category_types':category_types,'testimonial_data':testimonial_data}
     return render(request,'index.html',context=context)
@@ -83,5 +84,19 @@ def terms_of_services(request):
 
 def privacy_policy(request):
     category_types = Gallery.objects.values('type').distinct()
-    return render(request,'privacy_policy.html',context={'page': 'Privacy Policy','category_types':category_types})     
-
+    return render(request,'privacy_policy.html',context={'page': 'Privacy Policy','category_types':category_types})
+def import_export_excel(request):
+    category_types = Gallery.objects.values('type').distinct()
+    return render(request,'excel_import.html',context={'page':'Excel','category_types':category_types})
+def export_gallery_excel(request):
+    gallery_data = Gallery.objects.all()
+    data = []
+    for obj in gallery_data:
+        data.append({
+            "Type" : obj.type,
+            "Image Name" : obj.image_name,
+            "Title" : obj.title
+        })
+    # Export to Excel
+    pd.DataFrame(data).to_excel('gallery_excel.xlsx')
+    return HttpResponse('success')

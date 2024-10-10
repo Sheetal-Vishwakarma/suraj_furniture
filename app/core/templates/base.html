@@ -371,7 +371,12 @@
       $('#gallery_form').submit();      
     });
 
+    $(document).on('change','#table_name',function(){
+        var table_name = $("#table_name").val();
+        var anchor_tag = "<a href='#'>Download</a>"; 
+        $("#table_msg").html("Please download sample excel file: "+anchor_tag);
+        console.log(table_name);
+    });
   </script>
 </body>
-
 </html>

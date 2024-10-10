@@ -32,7 +32,9 @@ urlpatterns = [
     path('insert_newsletter_form/',insert_newsletter),
     path('gallery/',gallery),
     path('terms_of_services/',terms_of_services),
-    path('privacy_policy/',privacy_policy)
+    path('privacy_policy/',privacy_policy),
+    path('excel/',import_export_excel),
+    path('export_gallery_excel/',export_gallery_excel)
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
