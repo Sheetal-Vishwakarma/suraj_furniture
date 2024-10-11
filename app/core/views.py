@@ -7,6 +7,8 @@ from .models import Contactus,Newsletter,Gallery,Testimonial
 import os
 import datetime
 import pandas as pd
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -100,3 +102,23 @@ def export_gallery_excel(request):
     # Export to Excel
     pd.DataFrame(data).to_excel('gallery_excel.xlsx')
     return HttpResponse('success')
+def generate_pdf(request):
+    # Create a response object with PDF headers
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="Sample.pdf"'
+
+    # Create a PDF object
+    p = canvas.Canvas(response, pagesize=letter)
+    width, height = letter
+    
+    # Set the title of the PDF
+    p.setTitle("My Sample PDF")
+    # Draw text on the PDF
+    p.drawString(100, height - 100, "Hello, this is a PDF document generated using ReportLab.")
+    p.drawString(100, height - 120, "I'm Sheetal Vishwakarma")
+    p.drawString(100, height - 140, "Laravel | PHP | Codeignator | API | Django")
+
+    # Finalize the PDF
+    p.showPage()
+    p.save()
+    return response
